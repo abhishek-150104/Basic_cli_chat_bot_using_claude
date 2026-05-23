@@ -13,6 +13,11 @@ def chat(messages, system=None, temperature=1.0):
     if system:
         params["system"] = system
 
-    message = client.messages.create(**params)
+    message = ""
 
-    return message.content[0].text
+    with client.messages.stream(**params)as stream:
+        for text in stream.text_stream:
+            print(text, end="")
+            message = message + text
+
+    return message
