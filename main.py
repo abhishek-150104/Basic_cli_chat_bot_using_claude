@@ -19,7 +19,7 @@ while True:
 
     add_user_message(messages, user_input)
 
-    reply = chat(messages,system)
+    reply = chat(messages, temperature=1.0)
 
     add_assistant_message(messages, reply)
 
